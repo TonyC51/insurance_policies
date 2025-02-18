@@ -1,5 +1,6 @@
 package org.example.mapper;
 
+import org.example.model.InsurancePolicy;
 import org.example.utils.TestUtils;
 import org.junit.jupiter.api.Test;
 
@@ -12,30 +13,23 @@ class DtoToEntityMapperImplTest {
 
     @Test
     void createDtoToEntity() {
-        assertEquals(
-                mapper.createDtoToEntity(
-                    TestUtils.getExampleInsurancePolicyCreateDtos().getFirst()).getPolicyStatus(),
-                    TestUtils.getExampleInsurancePolicies().getFirst().getPolicyStatus());
-        assertEquals(
-                mapper.createDtoToEntity(
-                    TestUtils.getExampleInsurancePolicyCreateDtos().getFirst()).getStartingDate(),
-                    TestUtils.getExampleInsurancePolicies().getFirst().getStartingDate());
-        assertEquals(
-                mapper.createDtoToEntity(
-                    TestUtils.getExampleInsurancePolicyCreateDtos().getFirst()).getEndingDate(),
-                    TestUtils.getExampleInsurancePolicies().getFirst().getEndingDate());
+        InsurancePolicy mapped = mapper.createDtoToEntity(
+                TestUtils.getExampleInsurancePolicyCreateDtos().getFirst());
+        InsurancePolicy expected = TestUtils.getExampleInsurancePolicies().getFirst();
+        assertEquals(mapped.getPolicyStatus(), expected.getPolicyStatus());
+        assertEquals(mapped.getStartingDate(), expected.getStartingDate());
+        assertEquals(mapped.getEndingDate(), expected.getEndingDate());
+        assertEquals(mapped.getName(), expected.getName());
     }
 
     @Test
     void updateDtoToEntity() {
-        assertEquals(mapper.updateDtoToEntity(
-                1, TestUtils.getExampleInsurancePolicyUpdateDto()).getStartingDate(),
-                TestUtils.getExampleInsurancePolicies().getFirst().getStartingDate());
-        assertEquals(mapper.updateDtoToEntity(
-                        1, TestUtils.getExampleInsurancePolicyUpdateDto()).getEndingDate(),
-                TestUtils.getExampleInsurancePolicies().getFirst().getEndingDate());
-        assertEquals(mapper.updateDtoToEntity(
-                        1, TestUtils.getExampleInsurancePolicyUpdateDto()).getPolicyStatus(),
-                TestUtils.getExampleInsurancePolicies().getFirst().getPolicyStatus());
+        InsurancePolicy mapped = mapper.updateDtoToEntity(
+                1, TestUtils.getExampleInsurancePolicyUpdateDto());
+        InsurancePolicy expected = TestUtils.getExampleInsurancePolicies().getFirst();
+        assertEquals(mapped.getStartingDate(), expected.getStartingDate());
+        assertEquals(mapped.getEndingDate(), expected.getEndingDate());
+        assertEquals(mapped.getPolicyStatus(), expected.getPolicyStatus());
+        assertEquals(mapped.getName(), expected.getName());
     }
 }
